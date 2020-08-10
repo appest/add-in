@@ -34,10 +34,10 @@
           // var state = url.substr(url.indexOf("state=") + 6);
           var client_id = "29xVAE6nMzik67IBhN";
           var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
-          document.getElementById("id").attr("value", client_id);
-          document.getElementById("secret").attr("value", client_secret);
-          ocument.getElementById("code").attr("value", code);
-          document.getElementById("type").attr("value", "authorization_code");
+          // document.getElementById("id").attr("value", client_id);
+          // document.getElementById("secret").attr("value", client_secret);
+          // ocument.getElementById("code").attr("value", code);
+          // document.getElementById("type").attr("value", "authorization_code");
           // document.getElementById("form").submit(function(e) {
           //   var formObj = $(this);
           //   var formURL = formObj.attr("action");
@@ -59,11 +59,11 @@
           //   e.unbind(); //to stop multiple form submit.
           // });
           // $("#form").submit();
-          var data = new FormData(document.getElementById("form"));
-          // data.set("client_id", client_id);
-          // data.set("client_secret", client_secret);
-          // data.set("code", code);
-          // data.set("grant_type", "authorization_code");
+          var data = new FormData();
+          data.set("client_id", client_id);
+          data.set("client_secret", client_secret);
+          data.set("code", code);
+          data.set("grant_type", "authorization_code");
           // {
           //   "client_id", : client_id,
           //   client_secret: client_secret,
