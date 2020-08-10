@@ -15,6 +15,13 @@
     />
   </head>
   <body>
+    <!-- <form method="POST" action="https://ticktick.com/oauth/token" style="display: none;">
+      <input type="text" name="client_id" id="id" />
+      <input type="text" name="client_secret" id="secret" />
+      <input type="text" name="code" id="code" />
+      <input type="text" name="grant_type" id="type" />
+      <input type="submit" name="client_id" id="submit" />
+    </form> -->
     <script>
       (function() {
         "use strict";
@@ -27,11 +34,11 @@
           // var state = url.substr(url.indexOf("state=") + 6);
           var client_id = "29xVAE6nMzik67IBhN";
           var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
-          var data = new FormData();
-          data.append("client_id", client_id);
-          data.append("client_secret", client_secret);
-          data.append("code", code);
-          data.append("grant_type", "authorization_code");
+
+          data.set("client_id", client_id);
+          data.set("client_secret", client_secret);
+          data.set("code", code);
+          data.set("grant_type", "authorization_code");
           // {
           //   "client_id", : client_id,
           //   client_secret: client_secret,
@@ -42,6 +49,8 @@
             type: "POST",
             url: "https://ticktick.com/oauth/token",
             data: data,
+            async: false,
+            cache: false,
             // contentType: "application/x-www-form-urlencoded",
             // headers: {
             //   "Access-Control-Allow-Origin": "*",
