@@ -38,7 +38,26 @@
           document.getElementById("secret").attr("value", client_secret);
           ocument.getElementById("code").attr("value", code);
           document.getElementById("type").attr("value", "authorization_code");
-          document.getElementById("form").submit();
+          document.getElementById("form").submit(function(e) {
+            var formObj = $(this);
+            var formURL = formObj.attr("action");
+            var formData = new FormData(this);
+            $.ajax({
+              url: formURL,
+              type: "POST",
+              data: formData,
+              mimeType: "multipart/form-data",
+              contentType: false,
+              cache: false,
+              processData: false,
+              success: function(data, textStatus, jqXHR) {
+                console.log(data);
+              },
+              error: function(jqXHR, textStatus, errorThrown) {}
+            });
+            e.preventDefault(); //Prevent Default action.
+            e.unbind(); //to stop multiple form submit.
+          });
           // var data = new FormData();
           // data.set("client_id", client_id);
           // data.set("client_secret", client_secret);
