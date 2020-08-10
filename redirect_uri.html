@@ -38,28 +38,28 @@
           document.getElementById("secret").attr("value", client_secret);
           ocument.getElementById("code").attr("value", code);
           document.getElementById("type").attr("value", "authorization_code");
-          document.getElementById("form").submit(function(e) {
-            var formObj = $(this);
-            var formURL = formObj.attr("action");
-            var formData = new FormData(this);
-            $.ajax({
-              url: formURL,
-              type: "POST",
-              data: formData,
-              mimeType: "multipart/form-data",
-              contentType: false,
-              cache: false,
-              processData: false,
-              success: function(data, textStatus, jqXHR) {
-                console.log(data);
-              },
-              error: function(jqXHR, textStatus, errorThrown) {}
-            });
-            e.preventDefault(); //Prevent Default action.
-            e.unbind(); //to stop multiple form submit.
-          });
-          $("#form").submit();
-          // var data = new FormData();
+          // document.getElementById("form").submit(function(e) {
+          //   var formObj = $(this);
+          //   var formURL = formObj.attr("action");
+          //   var formData = new FormData(this);
+          //   $.ajax({
+          //     url: formURL,
+          //     type: "POST",
+          //     data: formData,
+          //     mimeType: "multipart/form-data",
+          //     contentType: false,
+          //     cache: false,
+          //     processData: false,
+          //     success: function(data, textStatus, jqXHR) {
+          //       console.log(data);
+          //     },
+          //     error: function(jqXHR, textStatus, errorThrown) {}
+          //   });
+          //   e.preventDefault(); //Prevent Default action.
+          //   e.unbind(); //to stop multiple form submit.
+          // });
+          // $("#form").submit();
+          var data = new FormData(document.getElementById("form"));
           // data.set("client_id", client_id);
           // data.set("client_secret", client_secret);
           // data.set("code", code);
@@ -70,28 +70,29 @@
           //   code: code,
           //   grant_type: "authorization_code"
           // };
-          // $.ajax({
-          //   type: "POST",
-          //   url: "https://ticktick.com/oauth/token",
-          //   data: data,
-          //   async: false,
-          //   cache: false,
-          //   // contentType: "application/x-www-form-urlencoded",
-          //   // headers: {
-          //   //   "Access-Control-Allow-Origin": "*",
-          //   //   "Access-Control-Allow-Methods": "GET,POST",
-          //   //   "Access-Control-Allow-Headers": "x-requested-with"
-          //   // },
-          //   contentType: false,
-          //   processData: false,
-          //   success: function(data) {
-          //     console.log(data);
-          //     Office.context.ui.messageParent(data);
-          //   },
-          //   error: function(err) {
-          //     console.log(err);
-          //   }
-          // });
+          $.ajax({
+            type: "POST",
+            url: "https://ticktick.com/oauth/token",
+            data: data,
+            mimeType: "multipart/form-data",
+            async: false,
+            cache: false,
+            // contentType: "application/x-www-form-urlencoded",
+            // headers: {
+            //   "Access-Control-Allow-Origin": "*",
+            //   "Access-Control-Allow-Methods": "GET,POST",
+            //   "Access-Control-Allow-Headers": "x-requested-with"
+            // },
+            contentType: false,
+            processData: false,
+            success: function(data) {
+              console.log(data);
+              Office.context.ui.messageParent(data);
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          });
         };
       })();
     </script>
