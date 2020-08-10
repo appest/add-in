@@ -46,7 +46,7 @@
       // The Office initialize function must be run each time a new page is loaded.
       Office.initialize = function() {
         $(document).ready(function() {
-          var token = getParameterByName("token");
+          var token = getParameterByName("access_token");
           if (token) {
             authenticationSuccess(token);
           } else {
