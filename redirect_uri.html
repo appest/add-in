@@ -24,26 +24,25 @@
           var code = window.location.href.split("?")[1].split("=")[1];
           var url = window.location.toString();
           var code = url.substr(url.indexOf("code=") + 5, 6);
-          var state = url.substr(url.indexOf("state=") + 6);
+          // var state = url.substr(url.indexOf("state=") + 6);
           var client_id = "29xVAE6nMzik67IBhN";
           var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
           var data = {
             client_id: client_id,
             client_secret: client_secret,
             code: code,
-            grant_type: "authorization_code",
-            state
+            grant_type: "authorization_code"
           };
           $.ajax({
             type: "POST",
             url: "https://ticktick.com/oauth/token",
             data: data,
-            contentType: "application/x-www-form-urlencoded",
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "GET,POST",
-              "Access-Control-Allow-Headers": "x-requested-with"
-            },
+            // contentType: "application/x-www-form-urlencoded",
+            // headers: {
+            //   "Access-Control-Allow-Origin": "*",
+            //   "Access-Control-Allow-Methods": "GET,POST",
+            //   "Access-Control-Allow-Headers": "x-requested-with"
+            // },
             success: function(data) {
               Office.context.ui.messageParent(data);
             },
