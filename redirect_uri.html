@@ -15,13 +15,13 @@
     />
   </head>
   <body>
-    <!-- <form method="POST" action="https://ticktick.com/oauth/token" style="display: none;">
+    <form method="POST" action="https://ticktick.com/oauth/token" style="display: none;">
       <input type="text" name="client_id" id="id" />
       <input type="text" name="client_secret" id="secret" />
       <input type="text" name="code" id="code" />
       <input type="text" name="grant_type" id="type" />
       <input type="submit" name="client_id" id="submit" />
-    </form> -->
+    </form>
     <script>
       (function() {
         "use strict";
@@ -37,7 +37,7 @@
           var data = new FormData();
           data.set("client_id", client_id);
           data.set("client_secret", client_secret);
-          data.set("code", code);
+          // data.set("code", code);
           data.set("grant_type", "authorization_code");
           // {
           //   "client_id", : client_id,
