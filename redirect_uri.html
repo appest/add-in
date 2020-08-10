@@ -20,7 +20,7 @@
         var arg;
         arg = {
           status: "auth success",
-          token: data.access_token
+          token: data
         };
         Office.context.ui.messageParent(JSON.stringify(arg));
       }
@@ -42,36 +42,45 @@
         if (!results[2]) return "";
         return decodeURIComponent(results[2].replace(/\+/g, " "));
       }
+
       // The Office initialize function must be run each time a new page is loaded.
       Office.initialize = function() {
         $(document).ready(function() {
-          var code = getParameterByName("code");
-          console.log(code);
-          var url = window.location.toString();
-          var client_id = "29xVAE6nMzik67IBhN";
-          var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
-          // document.getElementById("id").value = client_id;
-          // document.getElementById("secret").value = client_secret;
-          // document.getElementById("code").value = code;
-          // document.getElementById("type").value = "authorization_code";
-          // $("#form").submit();
-          var data = {
-            client_id: client_id,
-            client_secret: client_secret,
-            code: code,
-            grant_type: "authorization_code"
-          };
-          $.ajax({
-            type: "POST",
-            url: "https://ticktick.com/oauth/token",
-            data: data,
-            xhrFields: {
-              withCredentials: true
-            },
-            contentType: "application/x-www-form-urlencoded",
-            success: authenticationSuccess,
-            error: authenticationFailure
-          });
+          var token = getParameterByName("token");
+          if (token) {
+            authenticationSuccess(token);
+          } else {
+            authenticationFailure();
+          }
+          // var code = getParameterByName("code");
+          // var url = window.location.toString();
+          // var client_id = "29xVAE6nMzik67IBhN";
+          // var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
+          // var data = {
+          //   client_id: client_id,
+          //   client_secret: client_secret,
+          //   code: code,
+          //   grant_type: "authorization_code"
+          // };
+          // if (!code) {
+          //   authenticationFailure();
+          // }
+          // $.ajax({
+          //   type: "POST",
+          //   url: "https://ticktick.com/oauth/token",
+          //   data: data,
+          //   xhrFields: {
+          //     withCredentials: true
+          //   },
+          //   contentType: "application/x-www-form-urlencoded",
+          //   headers: {
+          //     "Access-Control-Allow-Origin": "*",
+          //     "Access-Control-Allow-Methods": "GET,POST",
+          //     "Access-Control-Allow-Headers": "x-requested-with"
+          //   },
+          //   success: authenticationSuccess,
+          //   error: authenticationFailure
+          // });
         });
       };
     </script>
