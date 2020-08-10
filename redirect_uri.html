@@ -15,7 +15,7 @@
     />
   </head>
   <body>
-    <form method="POST" action="https://ticktick.com/oauth/token" style="display: none;">
+    <form method="POST" id="form" action="https://ticktick.com/oauth/token" style="display: none;">
       <input type="text" name="client_id" id="id" />
       <input type="text" name="client_secret" id="secret" />
       <input type="text" name="code" id="code" />
@@ -34,39 +34,44 @@
           // var state = url.substr(url.indexOf("state=") + 6);
           var client_id = "29xVAE6nMzik67IBhN";
           var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
-          var data = new FormData();
-          data.set("client_id", client_id);
-          data.set("client_secret", client_secret);
+          document.getElementById("id").attr("value", client_id);
+          document.getElementById("secret").attr("value", client_secret);
+          ocument.getElementById("code").attr("value", code);
+          document.getElementById("type").attr("value", "authorization_code");
+          document.getElementById("form").submit();
+          // var data = new FormData();
+          // data.set("client_id", client_id);
+          // data.set("client_secret", client_secret);
           // data.set("code", code);
-          data.set("grant_type", "authorization_code");
+          // data.set("grant_type", "authorization_code");
           // {
           //   "client_id", : client_id,
           //   client_secret: client_secret,
           //   code: code,
           //   grant_type: "authorization_code"
           // };
-          $.ajax({
-            type: "POST",
-            url: "https://ticktick.com/oauth/token",
-            data: data,
-            async: false,
-            cache: false,
-            // contentType: "application/x-www-form-urlencoded",
-            // headers: {
-            //   "Access-Control-Allow-Origin": "*",
-            //   "Access-Control-Allow-Methods": "GET,POST",
-            //   "Access-Control-Allow-Headers": "x-requested-with"
-            // },
-            contentType: false,
-            processData: false,
-            success: function(data) {
-              console.log(data);
-              Office.context.ui.messageParent(data);
-            },
-            error: function(err) {
-              console.log(err);
-            }
-          });
+          // $.ajax({
+          //   type: "POST",
+          //   url: "https://ticktick.com/oauth/token",
+          //   data: data,
+          //   async: false,
+          //   cache: false,
+          //   // contentType: "application/x-www-form-urlencoded",
+          //   // headers: {
+          //   //   "Access-Control-Allow-Origin": "*",
+          //   //   "Access-Control-Allow-Methods": "GET,POST",
+          //   //   "Access-Control-Allow-Headers": "x-requested-with"
+          //   // },
+          //   contentType: false,
+          //   processData: false,
+          //   success: function(data) {
+          //     console.log(data);
+          //     Office.context.ui.messageParent(data);
+          //   },
+          //   error: function(err) {
+          //     console.log(err);
+          //   }
+          // });
         };
       })();
     </script>
