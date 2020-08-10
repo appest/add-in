@@ -43,7 +43,10 @@
             //   "Access-Control-Allow-Methods": "GET,POST",
             //   "Access-Control-Allow-Headers": "x-requested-with"
             // },
+            contentType: false,
+            processData: false,
             success: function(data) {
+              console.log(data);
               Office.context.ui.messageParent(data);
             },
             error: function(err) {
