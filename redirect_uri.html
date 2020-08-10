@@ -3,84 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TickTick Addin</title>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-
-    <!-- For more information on Office UI Fabric, visit https://developer.microsoft.com/fabric. -->
-    <link
-      rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css"
-    />
   </head>
   <body>
-    <form method="POST" id="form" action="https://ticktick.com/oauth/token" style="display: none;">
+    <!-- <form method="POST" id="form" action="https://ticktick.com/oauth/token" style="display: none;">
       <input type="text" name="client_id" id="id" />
       <input type="text" name="client_secret" id="secret" />
       <input type="text" name="code" id="code" />
       <input type="text" name="grant_type" id="type" />
       <input type="submit" name="client_id" id="submit" />
-    </form>
+    </form> -->
     <script>
-      (function() {
-        "use strict";
+      function authenticationSuccess(data) {
+        var arg;
+        arg = {
+          status: "auth success",
+          token: data.access_token
+        };
+        Office.context.ui.messageParent(JSON.stringify(arg));
+      }
 
-        // The Office initialize function must be run each time a new page is loaded.
-        Office.initialize = function() {
-          var code = window.location.href.split("?")[1].split("=")[1];
+      function authenticationFailure() {
+        arg = {
+          status: "auth failed",
+          token: undefined
+        };
+        Office.context.ui.messageParent(JSON.stringify(arg));
+      }
+
+      function getParameterByName(name) {
+        const url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+      // The Office initialize function must be run each time a new page is loaded.
+      Office.initialize = function() {
+        $(document).ready(function() {
+          var code = getParameterByName("code");
+          console.log(code);
           var url = window.location.toString();
-          var code = url.substr(url.indexOf("code=") + 5, 6);
-          // var state = url.substr(url.indexOf("state=") + 6);
           var client_id = "29xVAE6nMzik67IBhN";
           var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
-          document.getElementById("id").value = client_id;
-          document.getElementById("secret").value = client_secret;
-          document.getElementById("code").value = code;
-          document.getElementById("type").value = "authorization_code";
-          document.getElementById("form").submit(function(e) {
-            console.log(e);
+          // document.getElementById("id").value = client_id;
+          // document.getElementById("secret").value = client_secret;
+          // document.getElementById("code").value = code;
+          // document.getElementById("type").value = "authorization_code";
+          // $("#form").submit();
+          var data = {
+            client_id: client_id,
+            client_secret: client_secret,
+            code: code,
+            grant_type: "authorization_code"
+          };
+          $.ajax({
+            type: "POST",
+            url: "https://ticktick.com/oauth/token",
+            data: data,
+            xhrFields: {
+              withCredentials: true
+            },
+            contentType: "application/x-www-form-urlencoded",
+            success: authenticationSuccess,
+            error: authenticationFailure
           });
-          $("#form").submit();
-          // var data = new FormData();
-          // data.set("client_id", client_id);
-          // data.set("client_secret", client_secret);
-          // data.set("code", code);
-          // data.set("grant_type", "authorization_code");
-          // var data = {
-          //   client_id: client_id,
-          //   client_secret: client_secret,
-          //   code: code,
-          //   grant_type: "authorization_code"
-          // };
-          // $.ajax({
-          //   type: "POST",
-          //   url: "https://ticktick.com/oauth/token",
-          //   data: data,
-          //   // mimeType: "multipart/form-data",
-          //   async: false,
-          //   cache: false,
-          //   xhrFields: {
-          //     withCredentials: true
-          //   },
-          //   contentType: "application/x-www-form-urlencoded",
-          //   // headers: {
-          //   //   "Access-Control-Allow-Origin": "*",
-          //   //   "Access-Control-Allow-Methods": "GET,POST",
-          //   //   "Access-Control-Allow-Headers": "x-requested-with"
-          //   // },
-          //   contentType: false,
-          //   processData: false,
-          //   success: function(data) {
-          //     console.log(data);
-          //     Office.context.ui.messageParent(data);
-          //   },
-          //   error: function(err) {
-          //     console.log(err);
-          //   }
-          // });
-        };
-      })();
+        });
+      };
     </script>
   </body>
 </html>
