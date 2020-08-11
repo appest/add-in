@@ -8,13 +8,6 @@
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
   </head>
   <body>
-    <!-- <form method="POST" id="form" action="https://ticktick.com/oauth/token" style="display: none;">
-      <input type="text" name="client_id" id="id" />
-      <input type="text" name="client_secret" id="secret" />
-      <input type="text" name="code" id="code" />
-      <input type="text" name="grant_type" id="type" />
-      <input type="submit" name="client_id" id="submit" />
-    </form> -->
     <script>
       function authenticationSuccess(data) {
         var arg;
@@ -22,7 +15,6 @@
           status: "auth success",
           token: data
         };
-        console.log(arg);
         Office.context.ui.messageParent(JSON.stringify(arg));
       }
 
@@ -54,35 +46,6 @@
           } else {
             authenticationFailure();
           }
-          // var code = getParameterByName("code");
-          // var url = window.location.toString();
-          // var client_id = "29xVAE6nMzik67IBhN";
-          // var client_secret = "%##rbgxh52C%8RGcdPTVAe_SqQY+Z^81";
-          // var data = {
-          //   client_id: client_id,
-          //   client_secret: client_secret,
-          //   code: code,
-          //   grant_type: "authorization_code"
-          // };
-          // if (!code) {
-          //   authenticationFailure();
-          // }
-          // $.ajax({
-          //   type: "POST",
-          //   url: "https://ticktick.com/oauth/token",
-          //   data: data,
-          //   xhrFields: {
-          //     withCredentials: true
-          //   },
-          //   contentType: "application/x-www-form-urlencoded",
-          //   headers: {
-          //     "Access-Control-Allow-Origin": "*",
-          //     "Access-Control-Allow-Methods": "GET,POST",
-          //     "Access-Control-Allow-Headers": "x-requested-with"
-          //   },
-          //   success: authenticationSuccess,
-          //   error: authenticationFailure
-          // });
         });
       };
     </script>
